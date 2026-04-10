@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog: Python Libraries for Data Science</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2224%22 font-size=%2224%22>🖖</text></svg>">
+<style>
+body { font-family: "Segoe UI", Arial, sans-serif; margin:0; background:#fff; color:#222; }
+.navbar { display:flex; justify-content:space-between; align-items:center; padding:15px 40px; border-bottom:1px solid #eee; }
+.nav-left { font-weight:500; }
+.nav-right a { margin-left:20px; text-decoration:none; color:#444; position:relative; }
+.nav-right a::after { content:""; position:absolute; width:0%; height:1px; bottom:-3px; left:0; background:#000; transition:0.3s; }
+.nav-right a:hover::after { width:100%; }
+.container { max-width:900px; margin:auto; padding:40px 20px; }
+h1 { font-size:24px; margin-bottom:15px; }
+p { font-size:15px; line-height:1.6; margin-bottom:15px; }
+.footer { margin-top:50px; font-size:13px; color:#777; text-align:center; }
+/* PAGE TRANSITION */
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+body.loaded {
+    opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="nav-left">Md. Foysal Ferdous</div>
+    <div class="nav-right">
+        <a href="index.html">Home</a>
+        <a href="education.html">Education</a>
+        <a href="projects.html">Projects</a>
+        <a href="blogs.html">Blogs</a>
+    </div>
+</div>
+
+<div class="container">
+    <h1>Exploring Python Libraries for Data Science</h1>
+    <p>Python is the most popular language for Data Science, and its libraries make it incredibly versatile. Three key libraries are NumPy, Pandas, and Matplotlib.</p>
+    <p>NumPy provides efficient array computations and is the backbone of numerical operations. Pandas offers high-level data structures like DataFrames for data manipulation and cleaning. Matplotlib allows for flexible plotting and visualization of datasets, making it easier to interpret and communicate insights.</p>
+    <p>By combining these libraries, a data scientist can load, clean, analyze, and visualize data efficiently. Understanding these tools is essential for anyone starting in Data Science and AI research, as they form the foundation for building complex models and extracting meaningful patterns from data.</p>
+
+    <div class="footer">© 2026 Md. Foysal Ferdous</div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.body.classList.add("loaded"); // fade-in when page loads
+
+    // fade-out when clicking navbar links
+    const links = document.querySelectorAll(".nav-right a");
+    links.forEach(link => {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            const href = this.getAttribute("href");
+            document.body.classList.remove("loaded"); // triggers fade-out
+            setTimeout(() => {
+                window.location.href = href;
+            }, 300); // match with CSS transition duration
+        });
+    });
+});
+</script>
+</body>
+</html>

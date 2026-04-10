@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog: Understanding CNNs</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2224%22 font-size=%2224%22>🖖</text></svg>">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+body { font-family: "Segoe UI", Arial, sans-serif; margin:0; background:#fff; color:#222; }
+.navbar { display:flex; justify-content:space-between; align-items:center; padding:15px 40px; border-bottom:1px solid #eee; }
+.nav-left { font-weight:500; }
+.nav-right a { margin-left:20px; text-decoration:none; color:#444; position:relative; }
+.nav-right a::after { content:""; position:absolute; width:0%; height:1px; bottom:-3px; left:0; background:#000; transition:0.3s; }
+.nav-right a:hover::after { width:100%; }
+.container { max-width:900px; margin:auto; padding:40px 20px; }
+h1 { font-size:24px; margin-bottom:15px; }
+p { font-size:15px; line-height:1.6; margin-bottom:15px; }
+.footer { margin-top:50px; font-size:13px; color:#777; text-align:center; }
+/* PAGE TRANSITION */
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+body.loaded {
+    opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="nav-left">Md. Foysal Ferdous</div>
+    <div class="nav-right">
+        <a href="index.html">Home</a>
+        <a href="education.html">Education</a>
+        <a href="projects.html">Projects</a>
+        <a href="blogs.html">Blogs</a>
+    </div>
+</div>
+
+<div class="container">
+    <h1>Understanding Convolutional Neural Networks (CNNs)</h1>
+    <p>Convolutional Neural Networks (CNNs) are a class of deep learning models particularly effective for image recognition and computer vision tasks. They are designed to automatically and adaptively learn spatial hierarchies of features from input images, making them extremely powerful for pattern detection.</p>
+    <p>A CNN consists of several layers: convolutional layers, pooling layers, and fully connected layers. The convolutional layers apply filters to the input image, detecting edges, textures, and complex shapes. Pooling layers then reduce the spatial dimensions, allowing the network to focus on the most important features. Fully connected layers perform high-level reasoning and classification based on the features extracted in previous layers.</p>
+    <p>Applications of CNNs include image classification, object detection, facial recognition, and autonomous vehicles. By stacking multiple layers and training on large datasets, CNNs can achieve impressive accuracy in visual tasks that were previously extremely challenging for computers.</p>
+    <p>Understanding CNNs is essential for anyone interested in AI and machine learning, especially in domains related to computer vision.</p>
+
+    <div class="footer">© 2026 Md. Foysal Ferdous</div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.body.classList.add("loaded"); // fade-in when page loads
+
+    // fade-out when clicking navbar links
+    const links = document.querySelectorAll(".nav-right a");
+    links.forEach(link => {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            const href = this.getAttribute("href");
+            document.body.classList.remove("loaded"); // triggers fade-out
+            setTimeout(() => {
+                window.location.href = href;
+            }, 300); // match with CSS transition duration
+        });
+    });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2224%22 font-size=%2224%22>🖖</text></svg>">
+<style>
+body { font-family: "Segoe UI", Arial, sans-serif; margin:0; background:#fff; color:#222; opacity:0; transition:opacity 0.5s ease-in-out; }
+body.loaded { opacity:1; }
+
+/* NAVBAR */
+.navbar { display:flex; justify-content:space-between; align-items:center; padding:15px 40px; border-bottom:1px solid #eee; }
+.nav-left { font-weight:500; }
+.nav-right a { margin-left:20px; text-decoration:none; color:#444; position:relative; }
+.nav-right a::after { content:""; position:absolute; width:0%; height:1px; bottom:-3px; left:0; background:#000; transition:0.3s; }
+.nav-right a:hover::after { width:100%; }
+
+.container { max-width:1000px; margin:auto; padding:40px 20px; }
+
+h1 { font-size:26px; margin-bottom:20px; }
+
+/* PROJECT CARDS */
+.projects-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap:20px; }
+.project-card { padding:20px; border:1px solid #eee; border-radius:8px; transition: transform 0.2s, box-shadow 0.2s; background:#fafafa; }
+.project-card:hover { transform: translateY(-5px); box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+.project-card h3 { margin-top:0; font-size:18px; }
+.project-card p { font-size:14px; line-height:1.5; color:#333; }
+
+/* FOOTER */
+.footer { margin-top:50px; font-size:13px; color:#777; text-align:center; }
+
+/* LINKS */
+.project-card a { text-decoration:none; color:#0077b6; font-weight:500; }
+.project-card a:hover { text-decoration:underline; }
+
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="nav-left">Md. Foysal Ferdous</div>
+    <div class="nav-right">
+        <a href="index.html">Home</a>
+        <a href="education.html">Education</a>
+        <a href="projects.html">Projects</a>
+        <a href="blogs.html">Blogs</a>
+    </div>
+</div>
+
+<div class="container">
+    <h1>Projects</h1>
+
+    <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card">
+            <h3>4-bit Barrel Shifter</h3>
+            <p>Developed as part of CSE260 Digital Logic Design coursework. This project implements a 4-bit barrel shifter using combinational logic, allowing rapid shift operations (logical left, logical right, and rotate) on a 4-bit binary input. Efficient hardware utilization minimizes gate count while achieving high-speed performance.</p>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="project-card">
+            <h3>Project Two</h3>
+            <p>Coming soon.</p>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="project-card">
+            <h3>Project Three</h3>
+            <p>Coming Soon.</p>
+        </div>
+    </div>
+
+    <div class="footer">© 2026 Md. Foysal Ferdous</div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    document.body.classList.add("loaded");
+    const links = document.querySelectorAll(".nav-right a");
+    links.forEach(link => {
+        link.addEventListener("click", function(e) {
+            e.preventDefault();
+            const href = this.getAttribute("href");
+            document.body.classList.remove("loaded");
+            setTimeout(() => { window.location.href = href; }, 300);
+        });
+    });
+});
+</script>
+
+</body>
+</html>
