@@ -3,265 +3,768 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Academic Profile</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22><text y=%2224%22 font-size=%2224%22>🖖</text></svg>">
+<title>Personal Profile</title>
+<meta name="description" content="Personal profile">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
 <style>
-body {
-    font-family: "Segoe UI", Arial, sans-serif;
-    margin: 0;
-    background: #ffffff;
-    color: #222;
+:root{
+  --bg:#f7f7f4; --surface:#fff; --surface-hover:#f1f1ed;
+  --text:#171716; --muted:#777772; --muted-2:#a2a29c;
+  --border:#dfdfda; --border-dark:#c9c9c2; --nav-bg:rgba(247,247,244,.84);
+  --danger:#9d3f3f; --radius:14px;
+}
+[data-theme="dark"]{
+  --bg:#111110; --surface:#171716; --surface-hover:#1d1d1b;
+  --text:#efefeb; --muted:#8d8d87; --muted-2:#62625e;
+  --border:#292927; --border-dark:#3b3b38; --nav-bg:rgba(17,17,16,.84);
+  --danger:#e28d8d;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;width:100%;overflow-x:hidden}
+body{
+  width:100%;min-width:0;overflow-x:hidden;background:var(--bg);color:var(--text);
+  font-family:"DM Sans",sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased;
+  transition:background .3s ease,color .3s ease;
+}
+a{color:inherit;text-decoration:none}
+button,input,textarea{font:inherit}
+button{color:inherit}
+::selection{background:var(--text);color:var(--bg)}
+
+.container{width:min(1180px,calc(100% - 96px));margin:0 auto}
+section{padding:120px 0;scroll-margin-top:80px}
+.mono{font-family:"IBM Plex Mono",monospace}
+.section-head{display:grid;grid-template-columns:180px 1fr;margin-bottom:60px}
+.section-label{
+  font-family:"IBM Plex Mono",monospace;font-size:11px;text-transform:uppercase;
+  letter-spacing:1.3px;color:var(--muted)
+}
+.section-title{
+  font-size:clamp(32px,4vw,50px);font-weight:500;letter-spacing:-2.2px;
+  line-height:1.08;max-width:760px
 }
 
-/* NAVBAR */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 40px;
-    border-bottom: 1px solid #eee;
+/* NAV */
+header{
+  position:fixed;top:0;left:0;width:100%;z-index:1000;background:var(--nav-bg);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border-bottom:1px solid transparent;transition:border .25s ease
 }
+header.scrolled{border-color:var(--border)}
+nav{height:70px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:600;letter-spacing:-.3px}
+.logo-mark{width:7px;height:7px;border-radius:50%;background:var(--text)}
+.nav-right{display:flex;align-items:center;gap:18px}
+.nav-links{display:flex;gap:25px}
+.nav-links a{position:relative;font-size:12px;color:var(--muted);transition:color .2s ease}
+.nav-links a:hover,.nav-links a.active{color:var(--text)}
+.nav-links a::after{
+  content:"";position:absolute;bottom:-7px;left:0;width:0;height:1px;background:var(--text);
+  transition:width .25s ease
+}
+.nav-links a.active::after{width:100%}
+.icon-button{
+  width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--border);
+  border-radius:50%;background:transparent;cursor:pointer;transition:.2s ease
+}
+.icon-button:hover{background:var(--surface);border-color:var(--border-dark)}
+.edit-button{
+  height:34px;padding:0 13px;border:1px solid var(--border);border-radius:100px;
+  background:transparent;font-size:11px;font-family:"IBM Plex Mono",monospace;cursor:pointer
+}
+.edit-button:hover{background:var(--surface);border-color:var(--border-dark)}
 
-.nav-left {
-    font-weight: 500;
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:145px;padding-bottom:95px;overflow:hidden}
+.hero-content{
+  width:100%;min-width:0;
+  /* The hero alone is nudged slightly right. This fixes the cramped/cut-left feeling
+     without shifting the rest of the website. */
+  padding-left:clamp(18px,2.2vw,34px);
+  padding-right:8px;
 }
+.hero-topline{
+  display:flex;align-items:center;gap:9px;margin-bottom:35px;
+  font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)
+}
+.status-dot{position:relative;width:7px;height:7px;border-radius:50%;background:#5a9f69;flex:0 0 auto}
+.status-dot::after{content:"";position:absolute;inset:-4px;border:1px solid #5a9f69;border-radius:50%;opacity:.25}
+.hero h1{
+  width:100%;max-width:1000px;font-size:clamp(58px,7.2vw,104px);font-weight:500;
+  letter-spacing:-5px;line-height:.94
+}
+.hero h1 .muted{display:block;color:var(--muted-2)}
+.hero-bottom{margin-top:58px;display:grid;grid-template-columns:150px minmax(0,620px);gap:30px}
+.hero-small{padding-top:5px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)}
+.hero-description{max-width:610px;font-size:17px;color:var(--muted);line-height:1.75}
+.hero-actions{margin-top:30px;display:flex;gap:10px}
+.button{
+  display:inline-flex;align-items:center;gap:8px;padding:10px 15px;border:1px solid var(--border);
+  border-radius:100px;font-size:12px;transition:background .2s,border .2s,transform .2s
+}
+.button:hover{background:var(--surface);border-color:var(--border-dark);transform:translateY(-2px)}
+.button.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
 
-.nav-right a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: #444;
-    position: relative;
-}
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:180px 1fr 1fr}
+.about-label{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)}
+.about-copy{max-width:430px;padding-right:60px;font-size:16px;color:var(--muted)}
+.about-copy p+p{margin-top:20px}
+.profile-info{border-top:1px solid var(--border)}
+.info-row{display:grid;grid-template-columns:120px 1fr;padding:15px 0;border-bottom:1px solid var(--border);font-size:13px}
+.info-name{color:var(--muted)}
 
-.nav-right a::after {
-    content: "";
-    position: absolute;
-    width: 0%;
-    height: 1px;
-    bottom: -3px;
-    left: 0;
-    background: #000;
-    transition: 0.3s;
-}
+/* EDUCATION */
+.timeline{margin-left:180px;border-top:1px solid var(--border)}
+.timeline-item{display:grid;grid-template-columns:180px 1fr;padding:28px 0;border-bottom:1px solid var(--border)}
+.timeline-date{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)}
+.timeline-main h3{margin-bottom:5px;font-size:16px;font-weight:500}
+.timeline-main p{max-width:600px;font-size:13px;color:var(--muted)}
 
-.nav-right a:hover::after {
-    width: 100%;
-}
+/* FOCUS */
+.focus-list{margin-left:180px;border-top:1px solid var(--border)}
+.focus-item{display:grid;grid-template-columns:70px 1fr auto;align-items:center;min-height:90px;border-bottom:1px solid var(--border)}
+.focus-number{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--muted-2)}
+.focus-name{font-size:19px;font-weight:500;letter-spacing:-.5px}
+.focus-detail{font-size:12px;color:var(--muted)}
 
-/* MAIN LAYOUT */
-.container {
-    max-width: 1000px;
-    margin: auto;
-    padding: 40px 20px;
-}
+/* SKILLS */
+.skills-wrap{margin-left:180px;display:grid;grid-template-columns:repeat(2,1fr);border-top:1px solid var(--border)}
+.skill{min-height:175px;padding:25px 30px 25px 0;border-bottom:1px solid var(--border)}
+.skill:nth-child(odd){border-right:1px solid var(--border)}
+.skill:nth-child(even){padding-left:30px}
+.skill-top{display:flex;justify-content:space-between;margin-bottom:40px}
+.skill h3{font-size:15px;font-weight:500}
+.skill-index{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--muted-2)}
+.skill p{max-width:350px;font-size:13px;color:var(--muted)}
 
-.top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+/* PROJECTS */
+.project-list{margin-left:180px;border-top:1px solid var(--border)}
+.project{
+  position:relative;display:grid;grid-template-columns:60px 1.1fr 1.4fr auto;
+  align-items:center;min-height:105px;border-bottom:1px solid var(--border);overflow:hidden;
+  transition:padding .25s ease
 }
+.project::before{content:"";position:absolute;inset:0;background:var(--surface);transform:scaleY(0);transform-origin:bottom;transition:transform .25s;z-index:-1}
+.project:hover::before{transform:scaleY(1)}
+.project:hover{padding:0 16px}
+.project-number{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--muted-2)}
+.project-title{font-size:18px;font-weight:500;letter-spacing:-.4px}
+.project-description{padding-right:25px;font-size:12px;color:var(--muted)}
+.project-arrow{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--border);border-radius:50%;transition:.25s}
+.project:hover .project-arrow{transform:rotate(45deg);background:var(--text);color:var(--bg)}
 
-.profile {
-    display: flex;
-    gap: 20px;
-}
+/* INTERESTS */
+.interest-grid{margin-left:180px;display:flex;flex-wrap:wrap;gap:8px}
+.interest{padding:9px 14px;border:1px solid var(--border);border-radius:100px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted);transition:.2s}
+.interest:hover{color:var(--text);border-color:var(--border-dark);background:var(--surface)}
 
-.profile img {
-    width: 130px;
-    height: auto;
-}
+/* CONTACT */
+.contact-section{padding-top:150px}
+.contact-wrap{margin-left:180px}
+.contact-small{margin-bottom:25px;font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--muted)}
+.contact-title{max-width:850px;font-size:clamp(50px,7vw,88px);font-weight:500;letter-spacing:-5px;line-height:.98}
+.contact-title a{color:var(--muted-2);transition:color .25s}
+.contact-title a:hover{color:var(--text)}
+.contact-links{margin-top:55px;display:flex;flex-wrap:wrap;gap:10px}
+footer{padding:25px 0 35px;border-top:1px solid var(--border)}
+.footer-inner{display:flex;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--muted)}
 
-.profile-info h1 {
-    margin: 0;
-    font-size: 26px;
-    font-weight: 500;
-}
+/* REVEAL + PROGRESS */
+.reveal{opacity:0;transform:translateY(15px);transition:opacity .7s,transform .7s}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--text);z-index:2000}
 
-.profile-info p {
-    margin: 4px 0;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+/* EDIT PANEL */
+.editor-backdrop{
+  position:fixed;inset:0;background:rgba(0,0,0,.25);backdrop-filter:blur(3px);
+  z-index:2998;opacity:0;pointer-events:none;transition:opacity .25s
 }
+.editor-backdrop.open{opacity:1;pointer-events:auto}
+.editor{
+  position:fixed;top:0;right:0;width:min(480px,100%);height:100vh;background:var(--bg);
+  border-left:1px solid var(--border);z-index:2999;transform:translateX(100%);
+  transition:transform .3s ease;overflow-y:auto
+}
+.editor.open{transform:translateX(0)}
+.editor-head{
+  position:sticky;top:0;background:var(--nav-bg);backdrop-filter:blur(16px);
+  display:flex;align-items:center;justify-content:space-between;padding:18px 22px;
+  border-bottom:1px solid var(--border);z-index:2
+}
+.editor-head h2{font-size:16px;font-weight:500}
+.editor-body{padding:22px}
+.editor-note{
+  font-size:12px;color:var(--muted);padding:12px 14px;border:1px solid var(--border);
+  border-radius:10px;margin-bottom:24px
+}
+.editor-group{padding:22px 0;border-top:1px solid var(--border)}
+.editor-group:first-of-type{border-top:0}
+.editor-group h3{font-size:12px;font-family:"IBM Plex Mono",monospace;font-weight:500;margin-bottom:14px}
+.field{margin-bottom:13px}
+.field label{display:block;font-size:10px;font-family:"IBM Plex Mono",monospace;color:var(--muted);margin-bottom:5px;text-transform:uppercase}
+.field input,.field textarea{
+  width:100%;border:1px solid var(--border);background:var(--surface);color:var(--text);
+  border-radius:9px;padding:10px 11px;outline:none;font-size:13px
+}
+.field textarea{min-height:82px;resize:vertical}
+.field input:focus,.field textarea:focus{border-color:var(--border-dark)}
+.editor-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.small-btn{
+  border:1px solid var(--border);background:transparent;border-radius:100px;padding:8px 12px;
+  font-size:11px;cursor:pointer
+}
+.small-btn:hover{background:var(--surface)}
+.small-btn.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+.small-btn.danger{color:var(--danger)}
+.project-editor{padding:14px 0;border-top:1px dashed var(--border)}
+.project-editor:first-child{border-top:0}
+.project-editor-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.project-editor-top span{font-size:11px;color:var(--muted);font-family:"IBM Plex Mono",monospace}
+.remove-project{border:0;background:transparent;color:var(--danger);cursor:pointer;font-size:11px}
+.editor-status{font-size:11px;color:var(--muted);margin-top:12px;min-height:18px}
+.file-input{display:none}
 
-/* SOCIAL ICONS */
-.social {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-start;
+/* MOBILE */
+@media(max-width:850px){
+  .container{width:calc(100% - 48px)}
+  .nav-links{display:none}
+  section{padding:90px 0}
+  .hero{min-height:95vh}
+  .hero-content{padding-left:8px;padding-right:0}
+  .hero h1{letter-spacing:-4px}
+  .section-head,.hero-bottom{grid-template-columns:1fr;gap:25px}
+  .about-grid{grid-template-columns:1fr;gap:35px}
+  .about-copy{padding-right:0}
+  .timeline,.focus-list,.skills-wrap,.project-list,.interest-grid,.contact-wrap{margin-left:0}
+  .timeline-item{grid-template-columns:1fr;gap:8px}
+  .skills-wrap{grid-template-columns:1fr}
+  .skill:nth-child(odd){border-right:0}
+  .skill:nth-child(even){padding-left:0}
+  .project{grid-template-columns:40px 1fr auto;padding:20px 0}
+  .project-description{grid-column:2;margin-top:5px}
+  .project-arrow{grid-column:3;grid-row:1/span 2}
+  .focus-item{grid-template-columns:45px 1fr;padding:20px 0}
+  .focus-detail{grid-column:2;margin-top:4px}
+  .contact-title{letter-spacing:-3px}
 }
-
-.social a {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: #444;
-    font-size: 14px;
-    transition: 0.2s ease;
-}
-
-.social a i {
-    width: 20px;
-    text-align: center;
-    font-size: 16px;
-}
-
-.social a:hover {
-    color: #000;
-    transform: translateX(4px);
-}
-
-/* SECTIONS */
-.section {
-    margin-top: 35px;
-}
-
-.section h2 {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 10px;
-}
-
-.section p, .section li {
-    font-size: 14px;
-    color: #333;
-}
-
-/* subtle hover for list items (if any) */
-li {
-    margin-bottom: 6px;
-}
-
-li:hover {
-    transform: translateX(3px);
-    transition: 0.2s;
-}
-
-/* FOOTER */
-.footer {
-    margin-top: 50px;
-    font-size: 13px;
-    color: #777;
-/* PAGE TRANSITION */
-body {
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-body.loaded {
-    opacity: 1;
-}
+@media(max-width:500px){
+  .container{width:calc(100% - 36px)}
+  .edit-button{padding:0 10px}
+  .hero{padding-top:120px;padding-bottom:70px}
+  .hero-content{padding-left:4px}
+  .hero h1{font-size:clamp(50px,15.5vw,68px);letter-spacing:-3px;line-height:.96}
+  .hero-description{font-size:15px}
+  .hero-actions{flex-wrap:wrap}
+  .info-row{grid-template-columns:100px 1fr}
+  .footer-inner{gap:20px}
 }
 </style>
 </head>
 
 <body>
+<div class="progress" id="progress"></div>
 
-<!-- NAVBAR -->
-<div class="navbar">
-    <div class="nav-left">Md. Foysal Ferdous</div>
+<header id="header">
+  <nav class="container">
+    <a href="#home" class="logo"><span class="logo-mark"></span><span data-profile="name"></span></a>
     <div class="nav-right">
-        <a href="index.html">Home</a>
-        <a href="education.html">Education</a>
-        <a href="projects.html">Projects</a>
-        <a href="blogs.html">Blogs</a>
+      <div class="nav-links">
+        <a href="#about">About</a><a href="#education">Education</a><a href="#focus">Focus</a>
+        <a href="#skills">Skills</a><a href="#work">Work</a><a href="#contact">Contact</a>
+      </div>
+      <button class="edit-button" id="editOpen" aria-label="Edit profile">EDIT</button>
+      <button class="icon-button" id="themeToggle" aria-label="Toggle theme">◐</button>
     </div>
-</div>
+  </nav>
+</header>
 
-<div class="container">
-
-    <!-- TOP SECTION -->
-    <div class="top">
-
-        <div class="profile">
-            <img src="apic001.jpg" alt="Profile Photo">
-
-            <div class="profile-info">
-                <h1>Md. Foysal Ferdous</h1>
-                <p>Undergraduate Student, CSE, BRAC University</p>
-                <p><i class="fas fa-map-marker-alt"></i> Dhaka, Bangladesh</p>
-                <p><a href="mailto:foysalferdous5@gmail.com">foysalferdous5@gmail.com</a></p>
-            </div>
+<main>
+<section class="hero" id="home">
+  <div class="container hero-content reveal">
+    <div class="hero-topline"><span class="status-dot"></span><span data-profile="roleLine"></span></div>
+    <h1><span data-profile="name"></span>.<span class="muted" data-profile="tagline"></span></h1>
+    <div class="hero-bottom">
+      <div class="hero-small"><span data-profile="locationShort"></span><br><span id="heroYear"></span></div>
+      <div>
+        <p class="hero-description" data-profile="intro"></p>
+        <div class="hero-actions">
+          <a class="button primary" href="#about">Explore profile ↓</a>
+          <a class="button" href="#work">Selected work ↗</a>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <!-- SOCIAL WITH ICONS -->
-        <div class="social">
-            <a href="https://www.linkedin.com/in/md-foysal-ferdous-14753a292?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank">
-                <i class="fab fa-linkedin"></i> LinkedIn
-            </a>
-            <a href="https://github.com/Foysal-001" target="_blank">
-                <i class="fab fa-github"></i> GitHub
-            </a>
-            <a href="https://codeforces.com/profile/GRIDFALL___" target="_blank">
-                <i class="fas fa-code"></i> Codeforces
-            </a>
-        </div>
+<section id="about">
+  <div class="container reveal">
+    <div class="section-head"><div class="section-label">01 / About</div><h2 class="section-title" data-profile="aboutTitle"></h2></div>
+    <div class="about-grid">
+      <div class="about-label">PROFILE</div>
+      <div class="about-copy" id="aboutCopy"></div>
+      <div class="profile-info">
+        <div class="info-row"><span class="info-name">Name</span><span data-profile="name"></span></div>
+        <div class="info-row"><span class="info-name">Based</span><span data-profile="location"></span></div>
+        <div class="info-row"><span class="info-name">University</span><span data-profile="university"></span></div>
+        <div class="info-row"><span class="info-name">Discipline</span><span data-profile="discipline"></span></div>
+        <div class="info-row"><span class="info-name">Languages</span><span data-profile="languages"></span></div>
+        <div class="info-row"><span class="info-name">Currently</span><span data-profile="currently"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section id="education">
+  <div class="container reveal">
+    <div class="section-head"><div class="section-label">02 / Education</div><h2 class="section-title">Computer Science,<br>from fundamentals upward.</h2></div>
+    <div class="timeline">
+      <div class="timeline-item"><div class="timeline-date">PRESENT</div><div class="timeline-main"><h3 data-profile="degree"></h3><p><span data-profile="university"></span> · <span data-profile="location"></span></p></div></div>
+      <div class="timeline-item"><div class="timeline-date">DIRECTION</div><div class="timeline-main"><h3>Systems & Computation</h3><p>Exploring operating systems, algorithms, computational theory, software architecture and the foundations of computing.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="focus">
+  <div class="container reveal">
+    <div class="section-head"><div class="section-label">03 / Focus</div><h2 class="section-title">The parts of computing<br>I find fascinating.</h2></div>
+    <div class="focus-list">
+      <div class="focus-item"><div class="focus-number">01</div><div class="focus-name">Operating Systems</div><div class="focus-detail">MEMORY · FILE SYSTEMS · PROCESSES</div></div>
+      <div class="focus-item"><div class="focus-number">02</div><div class="focus-name">Low-Level Systems</div><div class="focus-detail">C · MEMORY · SYSTEM ARCHITECTURE</div></div>
+      <div class="focus-item"><div class="focus-number">03</div><div class="focus-name">Theory of Computation</div><div class="focus-detail">AUTOMATA · LANGUAGES · COMPUTABILITY</div></div>
+      <div class="focus-item"><div class="focus-number">04</div><div class="focus-name">Software Architecture</div><div class="focus-detail">DESIGN · STRUCTURE · SYSTEMS</div></div>
+      <div class="focus-item"><div class="focus-number">05</div><div class="focus-name">Artificial Intelligence</div><div class="focus-detail">TOOLS · GENERATION · EXPERIMENTATION</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container reveal">
+    <div class="section-head"><div class="section-label">04 / Toolkit</div><h2 class="section-title">Languages, concepts<br>and tools.</h2></div>
+    <div class="skills-wrap">
+      <div class="skill"><div class="skill-top"><h3>Programming</h3><span class="skill-index">01</span></div><p>C · C++ · Python · HTML · CSS</p></div>
+      <div class="skill"><div class="skill-top"><h3>Systems</h3><span class="skill-index">02</span></div><p>Operating Systems · File Systems · Memory Management · Linux</p></div>
+      <div class="skill"><div class="skill-top"><h3>Computer Science</h3><span class="skill-index">03</span></div><p>Algorithms · Automata · Computation · Data Structures</p></div>
+      <div class="skill"><div class="skill-top"><h3>Software</h3><span class="skill-index">04</span></div><p>OOP · Design Patterns · Testing · Software Architecture</p></div>
+      <div class="skill"><div class="skill-top"><h3>Creative AI</h3><span class="skill-index">05</span></div><p>Generative AI · Image Generation · Visual Experimentation</p></div>
+      <div class="skill"><div class="skill-top"><h3>Environment</h3><span class="skill-index">06</span></div><p>Git · GitHub · VS Code · Linux · WSL</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="container reveal">
+    <div class="section-head"><div class="section-label">05 / Selected Work</div><h2 class="section-title">Things I've built,<br>studied and experimented with.</h2></div>
+    <div class="project-list" id="projectList"></div>
+  </div>
+</section>
+
+<section id="interests">
+  <div class="container reveal">
+    <div class="section-head"><div class="section-label">06 / Beyond Code</div><h2 class="section-title">Other things that<br>keep me interested.</h2></div>
+    <div class="interest-grid" id="interestGrid"></div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="container reveal">
+    <div class="section-head"><div class="section-label">07 / Contact</div><div></div></div>
+    <div class="contact-wrap">
+      <div class="contact-small">OPEN TO CONVERSATIONS / IDEAS / COLLABORATION</div>
+      <h2 class="contact-title">Have something<br>interesting in mind?<br><a id="emailLink">Say hello. ↗</a></h2>
+      <div class="contact-links" id="socialLinks"></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <span>© <span id="year"></span> <span data-profile="nameUpper"></span></span>
+    <span data-profile="locationUpper"></span>
+  </div>
+</footer>
+
+<!-- Front-end editor. Data is saved in this browser using localStorage. -->
+<div class="editor-backdrop" id="editorBackdrop"></div>
+<aside class="editor" id="editor" aria-hidden="true">
+  <div class="editor-head">
+    <h2>Edit profile</h2>
+    <button class="icon-button" id="editClose" aria-label="Close editor">×</button>
+  </div>
+  <div class="editor-body">
+    <div class="editor-note">
+      This is a local front-end editor — no server or database required. Changes are saved in this browser.
+      Use <b>Export</b> to back up your profile data. This is intentionally not a fake “secure admin login”:
+      a real protected admin panel needs a backend.
     </div>
 
-    <!-- ABOUT -->
-    <div class="section">
-        <h2>About</h2>
-        <p>
-            I am Md. Foysal Ferdous, currently pursuing a BSc in Computer Science and Engineering at BRAC University, 
-            Dhaka, with a strong focus on Artificial Intelligence, Machine Learning, and Competitive Programming. My 
-            academic journey has been shaped by curiosity, discipline, and a desire to solve challenging problems with 
-            creative solutions. From an early age, I have been fascinated by the intersection of algorithms, data, and 
-            real-world applications, which led me to dive deep into computer science during my secondary education.
-        </p>
-        <p>
-            My foundational education began at Noubahini School and College in Khulna, where I developed strong analytical 
-            and problem-solving skills. I then continued my higher secondary education at Khulna Public College, where my 
-            interest in programming and logical reasoning flourished. These early experiences provided me with a solid 
-            academic base and instilled a passion for learning that continues to drive me today.
-        </p>
-        <p>
-            At BRAC University, I have focused on building a well-rounded skill set in both theoretical and applied aspects 
-            of computer science. My coursework and projects have included areas such as algorithm design, data structures, 
-            machine learning models, and computer vision applications. In parallel, I actively engage in competitive programming, 
-            participating in online contests and honing my ability to think critically and optimize solutions under time constraints. 
-        </p>
-        <p>
-            Beyond academics, I am deeply interested in exploring research opportunities in AI and ML, aiming to contribute to 
-            projects that have real-world impact. I enjoy working on collaborative projects, learning from peers, and experimenting 
-            with innovative ideas that push the boundaries of technology. When I’m not coding or studying, I like to follow tech blogs, 
-            participate in online forums, and stay updated with the latest trends in software development and AI research.
-        </p>
-        <p>
-            With a commitment to continuous growth, I aim to combine my strong academic foundation, practical coding expertise, 
-            and passion for innovation to make meaningful contributions in the field of computer science. My journey so far has 
-            been fueled by curiosity, discipline, and a drive to solve complex problems, and I am eager to continue this path, 
-            learning, building, and creating projects that matter.
-        </p>
+    <div class="editor-group">
+      <h3>01 / IDENTITY</h3>
+      <div class="field"><label>Name</label><input id="fName"></div>
+      <div class="field"><label>Role line</label><input id="fRole"></div>
+      <div class="field"><label>Tagline</label><input id="fTagline"></div>
+      <div class="field"><label>Short location</label><input id="fLocationShort"></div>
+      <div class="field"><label>Full location</label><input id="fLocation"></div>
+      <div class="field"><label>Intro</label><textarea id="fIntro"></textarea></div>
     </div>
 
-    <!-- FOOTER -->
-    <div class="footer">
-        © 2026 Md. Foysal Ferdous
+    <div class="editor-group">
+      <h3>02 / PROFILE</h3>
+      <div class="field"><label>University</label><input id="fUniversity"></div>
+      <div class="field"><label>Discipline</label><input id="fDiscipline"></div>
+      <div class="field"><label>Degree</label><input id="fDegree"></div>
+      <div class="field"><label>Languages</label><input id="fLanguages"></div>
+      <div class="field"><label>Currently</label><input id="fCurrently"></div>
+      <div class="field"><label>About heading</label><textarea id="fAboutTitle"></textarea></div>
+      <div class="field"><label>About paragraph 1</label><textarea id="fAbout1"></textarea></div>
+      <div class="field"><label>About paragraph 2</label><textarea id="fAbout2"></textarea></div>
+      <div class="field"><label>About paragraph 3</label><textarea id="fAbout3"></textarea></div>
     </div>
 
-</div>
+    <div class="editor-group">
+      <h3>03 / CONTACT & LINKS</h3>
+      <div class="field"><label>Email</label><input id="fEmail" type="email"></div>
+      <div class="field"><label>GitHub</label><input id="fGithub"></div>
+      <div class="field"><label>LinkedIn</label><input id="fLinkedin"></div>
+      <div class="field"><label>Instagram</label><input id="fInstagram"></div>
+      <div class="field"><label>Pexels</label><input id="fPexels"></div>
+    </div>
+
+    <div class="editor-group">
+      <h3>04 / SELECTED WORK</h3>
+      <div id="projectEditor"></div>
+      <button class="small-btn" id="addProject">+ Add work</button>
+    </div>
+
+    <div class="editor-group">
+      <h3>05 / INTERESTS</h3>
+      <div class="field"><label>Separate with commas</label><textarea id="fInterests"></textarea></div>
+    </div>
+
+    <div class="editor-group">
+      <h3>06 / SAVE & BACKUP</h3>
+      <div class="editor-actions">
+        <button class="small-btn primary" id="saveChanges">Save changes</button>
+        <button class="small-btn" id="exportData">Export JSON</button>
+        <button class="small-btn" id="importData">Import JSON</button>
+        <button class="small-btn danger" id="resetData">Reset defaults</button>
+        <input class="file-input" id="importFile" type="file" accept=".json,application/json">
+      </div>
+      <div class="editor-status" id="editorStatus"></div>
+    </div>
+  </div>
+</aside>
+
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    document.body.classList.add("loaded"); // fade-in when page loads
+/* =========================================================
+   ONE DEFAULT CONFIG
+   If you prefer editing code, this is the ONLY place you need.
+   The front-end EDIT panel writes an override to localStorage.
+========================================================= */
+const DEFAULT_PROFILE = {
+  name: "Foysal",
+  roleLine: "CS STUDENT / DEVELOPER / DIGITAL ARTIST",
+  tagline: "Curious by nature.",
+  locationShort: "DHAKA / BD",
+  location: "Dhaka, Bangladesh",
+  university: "BRAC University",
+  discipline: "Computer Science",
+  degree: "B.Sc. in Computer Science",
+  languages: "Bengali · English",
+  currently: "Studying & building",
 
-    // fade-out when clicking navbar links
-    const links = document.querySelectorAll(".nav-right a");
-    links.forEach(link => {
-        link.addEventListener("click", function(e) {
-            e.preventDefault();
-            const href = this.getAttribute("href");
-            document.body.classList.remove("loaded"); // triggers fade-out
-            setTimeout(() => {
-                window.location.href = href;
-            }, 300); // match with CSS transition duration
-        });
-    });
+  intro: "Computer Science student at BRAC University, interested in low-level systems, operating systems, computation and the ideas behind how computers actually work. Outside code, I explore generative AI and digital art.",
+
+  aboutTitle: "I like understanding what happens beneath the abstraction.",
+  about: [
+    "I'm a Computer Science student at BRAC University with a growing interest in systems, computation and software.",
+    "I'm particularly drawn to understanding the lower-level ideas behind computing — from operating systems and memory to computational models and software architecture.",
+    "I also enjoy the creative side of technology, especially generative AI, digital imagery and experimenting with new tools."
+  ],
+
+  email: "your@email.com",
+  socials: {
+    github: "#",
+    linkedin: "#",
+    instagram: "#",
+    pexels: "#"
+  },
+
+  projects: [
+    {
+      title: "SimpleFS",
+      description: "A small custom filesystem built in C, exploring inodes, block allocation, directories and disk images.",
+      url: "#"
+    },
+    {
+      title: "Fireline",
+      description: "A Python-based 3D firefighter game featuring fire propagation, rescue mechanics and resource management.",
+      url: "#"
+    },
+    {
+      title: "AI Visual Studies",
+      description: "An evolving collection of generative imagery and experiments with AI-assisted visual creation.",
+      url: "#"
+    },
+    {
+      title: "More on GitHub",
+      description: "Coursework, experiments and smaller software projects.",
+      url: "#"
+    }
+  ],
+
+  interests: [
+    "Generative AI","Digital Art","Photography","Technology",
+    "Gaming","Fragrances","Fitness","Visual Design"
+  ]
+};
+
+const STORAGE_KEY = "foysal_profile_v2";
+let profile = loadProfile();
+
+function clone(obj){ return JSON.parse(JSON.stringify(obj)); }
+
+function loadProfile(){
+  try{
+    const saved = localStorage.getItem(STORAGE_KEY);
+    return saved ? {...clone(DEFAULT_PROFILE), ...JSON.parse(saved)} : clone(DEFAULT_PROFILE);
+  }catch(e){
+    return clone(DEFAULT_PROFILE);
+  }
+}
+
+function safeUrl(url){
+  if(!url || url.trim()==="#") return "#";
+  const u=url.trim();
+  return /^(https?:\/\/|mailto:)/i.test(u) ? u : "https://" + u;
+}
+
+function render(){
+  document.title = `${profile.name} — Personal Profile`;
+  document.querySelector('meta[name="description"]').content =
+    `Personal profile of ${profile.name} — Computer Science student, developer and digital artist.`;
+
+  document.querySelectorAll("[data-profile]").forEach(el=>{
+    const key=el.dataset.profile;
+    if(key==="nameUpper") el.textContent=profile.name.toUpperCase();
+    else if(key==="locationUpper") el.textContent=profile.location.toUpperCase();
+    else el.textContent=profile[key] ?? "";
+  });
+
+  document.getElementById("aboutCopy").innerHTML =
+    (profile.about || []).map(p=>`<p>${escapeHtml(p)}</p>`).join("");
+
+  const projectList=document.getElementById("projectList");
+  projectList.innerHTML=(profile.projects || []).map((p,i)=>`
+    <a href="${escapeAttr(safeUrl(p.url))}" ${p.url && p.url!=="#" ? 'target="_blank" rel="noopener noreferrer"' : ''} class="project">
+      <span class="project-number">${String(i+1).padStart(2,"0")}</span>
+      <span class="project-title">${escapeHtml(p.title)}</span>
+      <span class="project-description">${escapeHtml(p.description)}</span>
+      <span class="project-arrow">↗</span>
+    </a>`).join("");
+
+  document.getElementById("interestGrid").innerHTML =
+    (profile.interests || []).map(x=>`<span class="interest">${escapeHtml(x)}</span>`).join("");
+
+  const email=document.getElementById("emailLink");
+  email.href=`mailto:${profile.email}`;
+  email.textContent="Say hello. ↗";
+
+  const socialNames=[["github","GitHub"],["linkedin","LinkedIn"],["instagram","Instagram"],["pexels","Pexels"]];
+  document.getElementById("socialLinks").innerHTML=socialNames
+    .filter(([key])=>profile.socials && profile.socials[key])
+    .map(([key,label])=>`<a class="button" href="${escapeAttr(safeUrl(profile.socials[key]))}" ${profile.socials[key]!=="#" ? 'target="_blank" rel="noopener noreferrer"' : ''}>${label} ↗</a>`)
+    .join("");
+
+  const year=new Date().getFullYear();
+  document.getElementById("year").textContent=year;
+  document.getElementById("heroYear").textContent=year;
+}
+
+function escapeHtml(s=""){
+  return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+}
+function escapeAttr(s=""){ return escapeHtml(s); }
+
+/* THEME */
+const root=document.documentElement;
+const themeToggle=document.getElementById("themeToggle");
+if(localStorage.getItem("theme")==="dark") root.setAttribute("data-theme","dark");
+themeToggle.addEventListener("click",()=>{
+  const dark=root.getAttribute("data-theme")==="dark";
+  if(dark){root.removeAttribute("data-theme");localStorage.setItem("theme","light")}
+  else{root.setAttribute("data-theme","dark");localStorage.setItem("theme","dark")}
 });
+
+/* HEADER + PROGRESS */
+const header=document.getElementById("header");
+const progress=document.getElementById("progress");
+window.addEventListener("scroll",()=>{
+  header.classList.toggle("scrolled",window.scrollY>20);
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  progress.style.width=(h>0?(window.scrollY/h)*100:0)+"%";
+});
+
+/* REVEAL */
+const revealObserver=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){entry.target.classList.add("visible");revealObserver.unobserve(entry.target)}
+  });
+},{threshold:.1});
+document.querySelectorAll(".reveal").forEach(el=>revealObserver.observe(el));
+
+/* ACTIVE NAV */
+const sections=document.querySelectorAll("main section[id]");
+const navLinks=document.querySelectorAll(".nav-links a");
+const navObserver=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      navLinks.forEach(a=>a.classList.remove("active"));
+      const active=document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+      if(active) active.classList.add("active");
+    }
+  });
+},{rootMargin:"-35% 0px -55% 0px"});
+sections.forEach(s=>navObserver.observe(s));
+
+/* EDITOR */
+const editor=document.getElementById("editor");
+const backdrop=document.getElementById("editorBackdrop");
+const statusEl=document.getElementById("editorStatus");
+
+function openEditor(){
+  fillEditor();
+  editor.classList.add("open");backdrop.classList.add("open");
+  editor.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
+}
+function closeEditor(){
+  editor.classList.remove("open");backdrop.classList.remove("open");
+  editor.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
+}
+document.getElementById("editOpen").addEventListener("click",openEditor);
+document.getElementById("editClose").addEventListener("click",closeEditor);
+backdrop.addEventListener("click",closeEditor);
+document.addEventListener("keydown",e=>{if(e.key==="Escape") closeEditor()});
+
+function setVal(id,val){document.getElementById(id).value=val??""}
+function fillEditor(){
+  setVal("fName",profile.name);setVal("fRole",profile.roleLine);setVal("fTagline",profile.tagline);
+  setVal("fLocationShort",profile.locationShort);setVal("fLocation",profile.location);setVal("fIntro",profile.intro);
+  setVal("fUniversity",profile.university);setVal("fDiscipline",profile.discipline);setVal("fDegree",profile.degree);
+  setVal("fLanguages",profile.languages);setVal("fCurrently",profile.currently);setVal("fAboutTitle",profile.aboutTitle);
+  setVal("fAbout1",profile.about?.[0]);setVal("fAbout2",profile.about?.[1]);setVal("fAbout3",profile.about?.[2]);
+  setVal("fEmail",profile.email);setVal("fGithub",profile.socials?.github);setVal("fLinkedin",profile.socials?.linkedin);
+  setVal("fInstagram",profile.socials?.instagram);setVal("fPexels",profile.socials?.pexels);
+  setVal("fInterests",(profile.interests||[]).join(", "));
+  renderProjectEditor();
+}
+
+function renderProjectEditor(){
+  document.getElementById("projectEditor").innerHTML=(profile.projects||[]).map((p,i)=>`
+    <div class="project-editor" data-index="${i}">
+      <div class="project-editor-top"><span>WORK ${String(i+1).padStart(2,"0")}</span><button class="remove-project" data-remove="${i}">Remove</button></div>
+      <div class="field"><label>Title</label><input data-pfield="title" value="${escapeAttr(p.title)}"></div>
+      <div class="field"><label>Description</label><textarea data-pfield="description">${escapeHtml(p.description)}</textarea></div>
+      <div class="field"><label>Link</label><input data-pfield="url" value="${escapeAttr(p.url)}"></div>
+    </div>`).join("");
+
+  document.querySelectorAll("[data-remove]").forEach(btn=>btn.addEventListener("click",()=>{
+    syncProjectFields();
+    profile.projects.splice(Number(btn.dataset.remove),1);
+    renderProjectEditor();
+  }));
+}
+
+function syncProjectFields(){
+  document.querySelectorAll(".project-editor").forEach(card=>{
+    const i=Number(card.dataset.index);
+    if(!profile.projects[i]) return;
+    card.querySelectorAll("[data-pfield]").forEach(input=>{
+      profile.projects[i][input.dataset.pfield]=input.value;
+    });
+  });
+}
+
+document.getElementById("addProject").addEventListener("click",()=>{
+  syncProjectFields();
+  profile.projects.push({title:"New work",description:"Add a short description here.",url:"#"});
+  renderProjectEditor();
+  editor.scrollTo({top:document.getElementById("projectEditor").offsetTop-80,behavior:"smooth"});
+});
+
+function readEditor(){
+  syncProjectFields();
+  profile.name=document.getElementById("fName").value.trim()||"Your Name";
+  profile.roleLine=document.getElementById("fRole").value.trim();
+  profile.tagline=document.getElementById("fTagline").value.trim();
+  profile.locationShort=document.getElementById("fLocationShort").value.trim();
+  profile.location=document.getElementById("fLocation").value.trim();
+  profile.intro=document.getElementById("fIntro").value.trim();
+  profile.university=document.getElementById("fUniversity").value.trim();
+  profile.discipline=document.getElementById("fDiscipline").value.trim();
+  profile.degree=document.getElementById("fDegree").value.trim();
+  profile.languages=document.getElementById("fLanguages").value.trim();
+  profile.currently=document.getElementById("fCurrently").value.trim();
+  profile.aboutTitle=document.getElementById("fAboutTitle").value.trim();
+  profile.about=[
+    document.getElementById("fAbout1").value.trim(),
+    document.getElementById("fAbout2").value.trim(),
+    document.getElementById("fAbout3").value.trim()
+  ].filter(Boolean);
+  profile.email=document.getElementById("fEmail").value.trim();
+  profile.socials={
+    github:document.getElementById("fGithub").value.trim(),
+    linkedin:document.getElementById("fLinkedin").value.trim(),
+    instagram:document.getElementById("fInstagram").value.trim(),
+    pexels:document.getElementById("fPexels").value.trim()
+  };
+  profile.interests=document.getElementById("fInterests").value.split(",").map(x=>x.trim()).filter(Boolean);
+}
+
+document.getElementById("saveChanges").addEventListener("click",()=>{
+  readEditor();
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(profile));
+  render();
+  statusEl.textContent="Saved in this browser ✓";
+  setTimeout(()=>statusEl.textContent="",2200);
+});
+
+document.getElementById("resetData").addEventListener("click",()=>{
+  if(!confirm("Reset all profile edits to the defaults in this HTML file?")) return;
+  localStorage.removeItem(STORAGE_KEY);
+  profile=clone(DEFAULT_PROFILE);render();fillEditor();
+  statusEl.textContent="Defaults restored.";
+});
+
+document.getElementById("exportData").addEventListener("click",()=>{
+  readEditor();
+  const blob=new Blob([JSON.stringify(profile,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a");a.href=url;a.download="profile-data.json";a.click();
+  URL.revokeObjectURL(url);
+  statusEl.textContent="Profile JSON exported.";
+});
+
+const importFile=document.getElementById("importFile");
+document.getElementById("importData").addEventListener("click",()=>importFile.click());
+importFile.addEventListener("change",async()=>{
+  const file=importFile.files[0];if(!file)return;
+  try{
+    const data=JSON.parse(await file.text());
+    profile={...clone(DEFAULT_PROFILE),...data};
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(profile));
+    render();fillEditor();statusEl.textContent="Profile imported ✓";
+  }catch(e){statusEl.textContent="Could not import that JSON file."}
+  importFile.value="";
+});
+
+render();
 </script>
 </body>
 </html>
